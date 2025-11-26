@@ -5,22 +5,21 @@ import os
 dir = str(input("Please enter the Directory location of the Project Folder: "))
 os.chdir(dir)
 db = sql.connect("The_Messier_Dualis_Database.db")
+tabname = str(input("Please enter the name of the table that you wish to work upon: "))
 
-def CreateTable():
-    tabname = str(input("Enter the Table name that you wish to create: "))
+def CreateTable(tabname):
     cursor = db.cursor()
     create_table = f'''
     CREATE TABLE {tabname} (
         Messier_Number TEXT PRIMARY KEY,
         Name TEXT,
         Distance INTEGER,
-        Discovery_Date TEXT,
+        Discovery_Date INTEGER,
         Discoverer TEXT,
         Object_Type TEXT,
         Constellation TEXT,
         Apparent_Magnitude REAL,
         Description TEXT,
-        Fun_Fact TEXT,
         Image_File TEXT
     );
     '''
@@ -28,8 +27,7 @@ def CreateTable():
     cursor.execute(create_table)
     db.commit()
 
-def ShowDB():
-    tabname = str(input("Please enter the name of the table that you wish to view: "))
+def ShowDB(tabname):
     time.sleep(0.5)
     cursor = db.cursor()
     showDB = f"SELECT * FROM {tabname}"
@@ -44,12 +42,11 @@ def ShowDB():
         print(row)
     db.commit()
 
-def ShowDBParticular():
-    tabname = str(input("Please enter the name of the table that you wish to view: "))
-    mesnum = str(input("Please enter the Messier Number that you wish to see the Records of: "))
+def ShowDBParticular(tabname):
+    mesnum = int(input("Please enter the Messier Number that you wish to see the Records of: "))
     time.sleep(0.5)
     cursor = db.cursor()
-    showDBParticular = f"SELECT * FROM {tabname} WHERE Messier_Number = '{mesnum}'"
+    showDBParticular = f"SELECT * FROM {tabname} WHERE Messier_Number = 'M{mesnum}';"
 
     cursor.execute(showDBParticular)
 
@@ -103,12 +100,11 @@ while(True):
     time.sleep(0.3)
     
     if (inp == 1):
-        CreateTable()
+        CreateTable(tabname)
         time.sleep(1)
         print("Table Created! :D")
     
     elif (inp == 2):
-        Tablename = str(input("Enter the Table name that you wish to Edit into: "))
         time.sleep(1)
         mesname = str(input("Please enter the Messier Number: "))
         time.sleep(0.6)
@@ -133,28 +129,27 @@ while(True):
         img = str(input("Please enter the Filename of the Image of the Messier Object: "))
         time.sleep(0.6)
         img2 = dir + '/' + "Image Files/" + img
-        UpdateTable(Tablename, mesname, objname, dist, objdate, objdisc, objtype, constname, apmag, desc, funfac, img2)
+        UpdateTable(tabname, mesname, objname, dist, objdate, objdisc, objtype, constname, apmag, desc, funfac, img2)
         time.sleep(1)
         print("Table Updated! :D")
 
     elif (inp == 3):
-        tabname = str(input("Enter the Table name that you wish to edit in: "))
         time.sleep(0.6)
         mesname = str(input("Please enter the Messier Number of the record: "))
         time.sleep(0.6)
-        DelRow(Tablename, mesname)
+        DelRow(tabname, mesname)
         time.sleep(1)
         print("Editing Complete! :D")
 
     elif (inp == 4):
         time.sleep(1)
-        ShowDB()
+        ShowDB(tabname)
         time.sleep(1)
         print("Done!")
 
     elif (inp == 5):
         time.sleep(0.4)
-        ShowDBParticular()
+        ShowDBParticular(tabname)
         time.sleep(1)
         print("Done!")
         
