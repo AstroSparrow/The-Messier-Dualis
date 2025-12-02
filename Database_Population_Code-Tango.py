@@ -9,7 +9,7 @@ i = 0
 DB = sql.connect("The_Messier_Dualis_Database.db")
 Cursor = DB.cursor()
 
-csvfile = open("Database_Descriptions.csv", "r")
+csvfile = open("Database_Messier_Descriptions.csv", "r")
 reader = csv.reader(csvfile)
 headers = next(reader)
 values = next(reader)
@@ -23,7 +23,7 @@ for data in Main:
     addcommand = "UPDATE The_Messier_Objects_Catalogue SET Description = ? WHERE Messier_Number = ?;"
     Cursor.execute(addcommand, (Value, f"M{i}"))
     print(f"Messier {i} Description has been Added!")
-    time.sleep(0.6)
+    time.sleep(0.2)
     
 time.sleep(1)
 DB.commit()

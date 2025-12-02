@@ -37,7 +37,7 @@ while(True):
         print("Alright! Starting the Database Population Code for Messier Objects Descriptions!")
         time.sleep(0.5)
         for i in range (1, 111):
-            response = call_gpt(f"Give me a Nice, Crisp 40 word Description for Messier {i} please (Maintain a Tone of Enthusiasim and make the Descriptions Engaging to read. Also put effort into sounding Human rather than AI. Also put great effort into ensuring that the Descriptions are factaully correct)")
+            response = call_gpt(f"Give me a Nice, Crisp 80 word Description for Messier {i} please (Maintain a Tone of Enthusiasim and make the Descriptions Engaging to read. Also put effort into sounding Human rather than AI. Also put great effort into ensuring that the Descriptions are factaully correct)")
             Main[f"Messier {i}"] = response
             print(f"Messier {i} has been added to the Dictionary!")
         time.sleep(1)

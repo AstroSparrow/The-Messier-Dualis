@@ -20,7 +20,7 @@ for i in range(1, 111):
     time.sleep(0.1)
     print(f"Downloading Image for Messier {i}... --")
     Response = reqs.get(URLs.format(num = i), stream=True)
-    f = open(f'Image Files/Messier_{i}.jpg', 'wb')
+    f = open(f'Assets/Image Files/Messier_{i}.jpg', 'wb')
     shush.copyfileobj(Response.raw, f)
     f.close()
 
