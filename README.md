@@ -1,7 +1,7 @@
 # The-Messier-Dualis
 (This is the Repository of 'The Messier Dualis' Python Project as my Final Project of my Computer Science Class (Highschool))
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Some Info about the Project**
+**Some Info about the Project**: 
 'Messier Dualis' is a Interactive GUI Based Project about the Messier List of Astronomical Objects (About 110 Objects) in the night sky.
 
 The Application has HD images of all the Messier Objects (As best as I could fit into here) along with Information about them like (Messier Number, Common Name, Distance from Earth (Light Years), Date of Discovery, Name of the Discoverer, Object Type, Constellation of which it is a part of, Apparent Magnitude, A short Description of it (About 80 words long))
