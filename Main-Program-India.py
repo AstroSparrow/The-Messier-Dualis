@@ -2,6 +2,7 @@
 
 import sqlite3 as sql
 import pygame as pg
+import keyboard as keys
 import time
 import random
 from PIL import Image
@@ -19,9 +20,10 @@ print("I wanted to combine My Love and Passion for Astronomy with my Upcoming Ho
 time.sleep(3)
 print("And honestly, what better way to prove it than making something like this for my CS final project?!")
 time.sleep(3)
+print()
 print("Well anyways, Without any further Ado...")
 time.sleep(2)
-print("Welcome to 'The Messier Dualis!'")
+print("Welcome to Messier Dualis!")
 time.sleep(2)
 print("Enjoy! :D")
 time.sleep(1)
@@ -32,6 +34,75 @@ timestamp_string = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
 print(f"Current Date and Time: {timestamp_string}")
 time.sleep(1.4)
 
+help_inp = str(input("Do you want the Instructions on how to operate this Software? (Yes = y; No = n): "))
+
+if (help_inp.lower() == 'y'):
+    time.sleep(0.5)
+    print()
+    print()
+    print("Sweet! (PS: Now some of my work will not go unnoticed :D) \n")
+    time.sleep(1.4)
+    print("There are 2 modes in the Software \n")
+    time.sleep(1)
+    print("You can either go for Randomised Exploration mode where the program chooses random objects for you to explore from the catalogue \n")
+    time.sleep(3)
+    print("And Serial-Wise Exploration mode which shows objects in the order that Sir Charles Messier Added them in \n")
+    time.sleep(3)
+    print("So, In the Menu Page, There is a button 'Dive In'. That takes you to the main window \n")
+    time.sleep(2)
+    print("The Image of the Object will appear on the Right and info about the Object will appear on the Left \n")
+    time.sleep(2)
+    print("You can move to the next object using the 'Right Arrow' key \n")
+    time.sleep(1.5)
+    print("You can move to the previous object using the 'Left Arrow' Key \n")
+    time.sleep(1.5)
+    print("In Addition, You can exit the program anytime by pressing the 'Escape' Key")
+    time.sleep(0.4)
+    print("(Not Sure why you would ever wanna do that tho 😉) \n")
+    time.sleep(1.6)
+    print("Their is Music and sound effects too for some Ear-Candy \n")
+    time.sleep(3)
+    print("Anyways, That's about it. Enjoy! :D")
+    print()
+    print()
+    time.sleep(1.5)
+
+elif (help_inp.lower() == 'n'):
+    print("No worries! Welcome Back :D")
+    print()
+    print()
+    time.sleep(2)
+
+else:
+    print("Invalid Input, Showing Instructions as default...")
+    print()
+    print()
+    time.sleep(1.4)
+    print("There are 2 modes in the Software \n")
+    time.sleep(1)
+    print("You can either go for Randomised Exploration mode where the program chooses random objects for you to explore from the catalogue \n")
+    time.sleep(3)
+    print("And Serial-Wise Exploration mode which shows objects in the order that Sir Charles Messier Added them in \n")
+    time.sleep(3)
+    print("So, In the Menu Page, There is a button 'Dive In'. That takes you to the main window \n")
+    time.sleep(2)
+    print("The Image of the Object will appear on the Right and info about the Object will appear on the Left \n")
+    time.sleep(2)
+    print("You can move to the next object using the 'Right Arrow' key \n")
+    time.sleep(1.5)
+    print("You can move to the previous object using the 'Left Arrow' Key \n")
+    time.sleep(1.5)
+    print("In Addition, You can exit the program anytime by pressing the 'Escape' Key")
+    time.sleep(0.4)
+    print("(Not Sure why you would ever wanna do that tho 😉) \n")
+    time.sleep(1.6)
+    print("Their is Music and sound effects too for some Ear-Candy \n")
+    time.sleep(3)
+    print("Anyways, That's about it. Enjoy! :D")
+    print()
+    print()
+    time.sleep(1.5)
+
 breathe_scale = 1.0
 breathe_direction = 1
 breathe_speed = 0.00006
@@ -41,17 +112,18 @@ randomised = 0
 RandomMessierNum2 = 0
 Inp = int(input("Do you Want Randomised or Serial-Wise Exploration of the Messier Catalogue? (1 = Random, 2 = Serial-Wise): "))
 
-if (time.time() - CurTime >= 14):
+"""if (time.time() - CurTime >= 14):
     print("No Input Recieved. Commencing in Randomised Exploration Mode...")
-    randomised = 1
+    randomised = 1"""
 
 if (Inp == 1):
     randomised = 1
     print("Alrighty! Commencing in Randomised Exploration Mode!...")
     time.sleep(1)
-    for Taha in range (1, 111):
+    """for Taha in range (1, 111):
         RandomMessierNum = random.randint(1, 110)
-        RandomMessierList.append(RandomMessierNum)
+        RandomMessierList.append(RandomMessierNum)"""
+    RandomMessierList = random.sample(range(1, 111), 110)
 
 elif (Inp == 2):
     randomised = 0
@@ -79,7 +151,7 @@ STATE_INTRO = "Intro"
 STATE_MAIN = "Main"
 CurState = STATE_INTRO
 FADEOUT_TIME = 2000
-VOLUME = 1
+VOLUME = 2
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 680
@@ -233,9 +305,12 @@ while (running == True):
                 current_track = (current_track + 1) % len(playlist)
                 play_track(current_track)
 
-            if (event.type == pg.KEYDOWN):
+            """if (event.type == pg.KEYDOWN):
                 if event.key == pg.K_ESCAPE:
-                    running = False
+                    running = False"""
+            
+        if (keys.is_pressed('esc')):
+                running = False
 
         #Welcome_Button_Rect = Welcome_Text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 150))
         #Welcome_Text2_rect = Welcome_Text2.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 ))
@@ -270,6 +345,9 @@ while (running == True):
         '''
         if (randomised == 1):
             if (Next == True):
+                if (RandomMessierNum2 >= 110):
+                    RandomMessierList = random.sample(range(1, 111), 110)
+
                 Choice = RandomMessierList[RandomMessierNum2]
 
                 View_Command = f"SELECT Image_File FROM The_Messier_Objects_Catalogue WHERE Messier_Number = 'M{Choice}';"
@@ -413,25 +491,40 @@ Here's a Short Brief about Messier {SerialExplo}!:
                     current_track = (current_track + 1) % len(playlist)
                     play_track(current_track)
 
-                if (event.type == pg.KEYDOWN):
+                """if (event.type == pg.KEYDOWN):
                     if (event.key == pg.K_ESCAPE):
-                        running = False
+                        running = False"""
 
-                if (event.type == pg.KEYDOWN):
+                """if (event.type == pg.KEYDOWN):
                     if (event.key == pg.K_RIGHT):
                         Next = True
                         SerialExplo = SerialExplo + 1
-                        RandomMessierNum2 = RandomMessierNum2 + 1
+                        RandomMessierNum2 = RandomMessierNum2 + 1"""
 
-                if (event.type == pg.KEYDOWN):
+                """if (event.type == pg.KEYDOWN):
                     if (event.key == pg.K_LEFT):
                         Next = True
                         SerialExplo = SerialExplo - 1
-                        RandomMessierNum2 = RandomMessierNum2 - 1
+                        RandomMessierNum2 = RandomMessierNum2 - 1"""
 
                 if event.type == pg.ACTIVEEVENT:
                     if event.gain != 1:
                         pg.event.set_grab(True)
+
+            if (keys.is_pressed('right') or keys.is_pressed('d')):
+                Next = True
+                SerialExplo = SerialExplo + 1
+                RandomMessierNum2 = RandomMessierNum2 + 1
+                time.sleep(0.2)
+
+            if (keys.is_pressed('left') or keys.is_pressed('a')):
+                Next = True
+                SerialExplo = SerialExplo - 1
+                RandomMessierNum2 = RandomMessierNum2 - 1
+                time.sleep(0.2)
+
+            if (keys.is_pressed('esc')):
+                running = False
 
             '''
             if (time.time() - CurTime2 >= 4):
@@ -456,6 +549,7 @@ pg.quit()
 
 print("From the bottom of my heart, I truly hope you enjoyed my project and discovered a new spark of curiosity or love for our cosmos through it!")
 time.sleep(4)
+print()
 print("Anyways, By-Bieeeee!! 👋")
 time.sleep(1)
 exit()
