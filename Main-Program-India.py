@@ -512,18 +512,24 @@ Here's a Short Brief about Messier {SerialExplo}!:
                         pg.event.set_grab(True)
 
             if (keys.is_pressed('right') or keys.is_pressed('d')):
+                Click_Soundeffect.play()
+                time.sleep(0.6)
                 Next = True
                 SerialExplo = SerialExplo + 1
                 RandomMessierNum2 = RandomMessierNum2 + 1
                 time.sleep(0.2)
 
             if (keys.is_pressed('left') or keys.is_pressed('a')):
+                Click_Soundeffect.play()
+                time.sleep(0.6)
                 Next = True
                 SerialExplo = SerialExplo - 1
                 RandomMessierNum2 = RandomMessierNum2 - 1
                 time.sleep(0.2)
 
             if (keys.is_pressed('esc')):
+                Click_Soundeffect.play()
+                time.sleep(1)
                 running = False
 
             '''
